@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<div class="card">
+
+    <div class="search">
+        <input type="text" placeholder="Enter city name" spellcheck="false">
+
+        <button id="searchBtn">
+            <i data-lucide="search"></i>
+        </button>
+    </div>
+
+    <div class="error">
+        <p>Invalid City Name</p>
+    </div>
+
+    <div class="suggestion">
+        <p class="suggestion-text">Wear something comfortable 👕</p>
+    </div>
+
+    <div class="weather">
+        <img src="clear.png" class="weather-icon">
+
+        <h1 class="temp">--°C</h1>
+        <h2 class="city">City</h2>
+
+        <div class="details">
+
+            <div class="col">
+                <i data-lucide="droplets"></i>
+                <div>
+                    <p class="humidity">--%</p>
+                    <p>Humidity</p>
+                </div>
+            </div>
+
+            <div class="col">
+                <i data-lucide="wind"></i>
+                <div>
+                    <p class="wind">-- km/h</p>
+                    <p>Wind Speed</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- JS -->
+<script src="script.js"></script>
+</body>
+</html>
