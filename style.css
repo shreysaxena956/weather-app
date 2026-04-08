@@ -1,160 +1,170 @@
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:sans-serif;
 }
 
 body{
-    background: url("backgroundclear.jpg") no-repeat center center/cover;
-
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height:100vh;
+    background:url("lucas-calloch-P-yzuyWFEIk-unsplash.jpg") no-repeat center/cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    transition: background-image 0.6s ease-in-out;
 }
 
-/* Dark overlay */
+/* overlay */
 body::before{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.3);
-    top: 0;
-    left: 0;
-    z-index: -1;
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.35);
+    top:0;
+    left:0;
+    z-index:-1;
 }
 
-/* Glass card */
-.card{
-    width: 90%;
-    max-width: 420px;
-    padding: 25px;
-
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
-
-    color: white;
-    text-align: center;
-
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+/* SEARCH */
+.hero{
+    position:absolute;
+    top:10%;
+    left:45%;
+    transform:translate(-50%, -50%);
 }
 
-/* Search */
-.search{
-    display: flex;
-    gap: 10px;
+.search-bar{
+    display:flex;
+    gap:10px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(20px);
+    padding:15px 20px;
+    border-radius:40px;
 }
 
-.search input{
-    flex: 1;
-    padding: 12px;
-    border-radius: 30px;
-    border: none;
-    outline: none;
-
-    background: rgba(255,255,255,0.2);
-    color: white;
+.search-bar input{
+    width:1200px;
+    padding:12px;
+    border:none;
+    outline:none;
+    border-radius:20px;
+    background:transparent;
+    color:white;
 }
 
-/* Premium button */
-.search button{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,0.3);
-
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-
-    color: white;
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: 0.3s;
+.search-bar button{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
 }
 
-.search button:hover{
-    transform: scale(1.1);
+/* MAIN */
+.main{
+    position:absolute;
+    top:55%;
+    width:80%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-/* Weather */
-.weather{
-    display: none;
-    margin-top: 20px;
+/* WEATHER CARD */
+.weather-card{
+    width:300px;
+    padding:20px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+    text-align:center;
+    display:none;
 }
 
 .weather-icon{
-    width: 110px;
-    filter: drop-shadow(0 0 15px rgba(255,255,255,0.5));
+    width:100px;
 }
 
 .temp{
-    font-size: 50px;
+    font-size:50px;
 }
 
 .details{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-
-    background: rgba(255,255,255,0.1);
-    padding: 10px;
-    border-radius: 15px;
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
 }
 
-/* Icon + text */
-.col{
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* CHARACTER BOX */
+.character-box{
+    width:300px;
+    height:400px;
+    background:white;
+    border-radius:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-/* Lucide icons */
-.col i{
-    width: 28px;
-    height: 28px;
-
-    color: white;
-    opacity: 0.9;
-
-    filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
-    transition: 0.3s;
+/* BOY */
+.boy{
+    position:relative;
+    animation:float 3s ease-in-out infinite;
 }
 
-.col i:hover{
-    transform: scale(1.2);
-    opacity: 1;
+@keyframes float{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-10px); }
+    100%{ transform:translateY(0); }
 }
 
-/* Error */
-.error{
-    display: none;
-    color: #ffb3b3;
+/* HEAD */
+.head{
+    width:80px;
+    height:80px;
+    background:#ffcc99;
+    border-radius:50%;
+}
+
+/* BODY */
+.body{
+    width:60px;
+    height:100px;
+    background:#4dabf7;
+    margin:auto;
+    border-radius:10px;
+}
+
+/* SUNGLASSES */
+.sunglasses{
+    position:absolute;
+    top:20px;
+    left:10px;
+    width:60px;
+    height:20px;
+    background:black;
+    border-radius:5px;
+}
+
+/* UMBRELLA */
+.umbrella{
+    position:absolute;
+    top:-60px;
+    left:-20px;
+    width:120px;
+    height:60px;
+    background:red;
+    border-radius:60px 60px 0 0;
+}
+
+/* HIDE */
+.hidden{
+    display:none;
+}
+.weather-card{
+    /* your existing code stays */
+
+    margin-left: -100px;
     margin-top: 10px;
-}
-
-/* Suggestion */
-.suggestion{
-    display: none;
-    margin-top: 15px;
-    padding: 12px;
-
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
-
-    border-radius: 12px;
-}
-
-.suggestion-text{
-    color: white;
 }
