@@ -1,170 +1,482 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:sans-serif;
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-blur: 25px;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --accent: #007AFF; /* Apple Blue */
+    --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-body{
-    height:100vh;
-    background:url("lucas-calloch-P-yzuyWFEIk-unsplash.jpg") no-repeat center/cover;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    transition: background-image 0.6s ease-in-out;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* overlay */
-body::before{
-    content:"";
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.35);
-    top:0;
-    left:0;
-    z-index:-1;
+body {
+    font-family: var(--font-main);
+    background-color: #000;
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* SEARCH */
-.hero{
-    position:absolute;
-    top:10%;
-    left:45%;
-    transform:translate(-50%, -50%);
+/* Background Image & Overlays */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #1a1a1a; /* Dark fallback */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('default.jpg');
+    transition: background-image 1.2s ease-in-out;
 }
 
-.search-bar{
-    display:flex;
-    gap:10px;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(20px);
-    padding:15px 20px;
-    border-radius:40px;
+.bg-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
 }
 
-.search-bar input{
-    width:1200px;
-    padding:12px;
-    border:none;
-    outline:none;
-    border-radius:20px;
-    background:transparent;
-    color:white;
+/* App Container */
+.app-container {
+    width: 100%;
+    max-width: 1100px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    z-index: 1;
 }
 
-.search-bar button{
-    padding:10px 20px;
-    border:none;
-    border-radius:20px;
-    cursor:pointer;
+/* Glass Utility */
+.glass-pill {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
 }
 
-/* MAIN */
-.main{
-    position:absolute;
-    top:55%;
-    width:80%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* WEATHER CARD */
-.weather-card{
-    width:300px;
-    padding:20px;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(20px);
-    border-radius:20px;
-    text-align:center;
-    display:none;
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
 }
 
-.weather-icon{
-    width:100px;
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
-.temp{
-    font-size:50px;
+#logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
-.details{
-    display:flex;
-    justify-content:space-between;
-    margin-top:20px;
+.logo-icon {
+    color: var(--accent);
 }
 
-/* CHARACTER BOX */
-.character-box{
-    width:300px;
-    height:400px;
-    background:white;
-    border-radius:20px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    width: 320px;
 }
 
-/* BOY */
-.boy{
-    position:relative;
-    animation:float 3s ease-in-out infinite;
+.search-container input {
+    background: none;
+    border: none;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
 }
 
-@keyframes float{
-    0%{ transform:translateY(0); }
-    50%{ transform:translateY(-10px); }
-    100%{ transform:translateY(0); }
+.search-container input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
-/* HEAD */
-.head{
-    width:80px;
-    height:80px;
-    background:#ffcc99;
-    border-radius:50%;
+/* Main Weather Card */
+.main-card-section {
+    width: 100%;
+    margin-bottom: 35px; /* Added margin between main card and grid */
 }
 
-/* BODY */
-.body{
-    width:60px;
-    height:100px;
-    background:#4dabf7;
-    margin:auto;
-    border-radius:10px;
+.main-card {
+    position: relative;
+    padding: 60px;
+    overflow: hidden;
+    min-height: 420px;
+    background: rgba(255, 255, 255, 0.08); /* Slightly more transparent for contrast */
 }
 
-/* SUNGLASSES */
-.sunglasses{
-    position:absolute;
-    top:20px;
-    left:10px;
-    width:60px;
-    height:20px;
-    background:black;
-    border-radius:5px;
+.card-content {
+    position: relative;
+    z-index: 2;
 }
 
-/* UMBRELLA */
-.umbrella{
-    position:absolute;
-    top:-60px;
-    left:-20px;
-    width:120px;
-    height:60px;
-    background:red;
-    border-radius:60px 60px 0 0;
+.weather-info h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
 }
 
-/* HIDE */
-.hidden{
-    display:none;
+.weather-info p#current-time {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
 }
-.weather-card{
-    /* your existing code stays */
 
-    margin-left: -100px;
-    margin-top: 10px;
+.temp-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+#temperature {
+    font-size: 8rem;
+    font-weight: 200;
+    line-height: 1;
+}
+
+.unit {
+    font-size: 3rem;
+    margin-top: 15px;
+    font-weight: 300;
+}
+
+#weather-condition {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    color: var(--text-secondary);
+}
+
+/* Animation Layer inside Card */
+.animation-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Grid Section */
+.grid-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px; /* Increased gap for better spacing */
+}
+
+.small-card {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+}
+
+.card-header h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Clothing Content */
+.clothing-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    text-align: center;
+    gap: 10px;
+}
+
+.clothing-visual {
+    font-size: 3rem;
+    color: var(--accent);
+}
+
+#clothing-text {
+    font-weight: 500;
+}
+
+/* Character Card */
+.character-card {
+    padding: 0;
+    background: rgba(255, 255, 255, 0.18); /* More opaque */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.character-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#character-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+/* News List */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    max-height: 200px;
+    padding-right: 5px;
+}
+
+.news-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.news-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.news-item {
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.news-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Loading Spinner */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.hidden { display: none; }
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Footer */
+footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.footer-info {
+    font-size: 0.8rem;
+    padding: 6px 15px;
+    color: var(--text-secondary);
+}
+
+/* --- Responsive Design Tiers --- */
+
+/* 1. Large Laptops / Desktops (Default) */
+/* Grid is 3 columns, font sizes are large. */
+
+/* 2. Tablets (iPad, larger tablets) */
+@media (max-width: 1024px) {
+    .app-container {
+        padding: 30px 15px;
+        gap: 25px;
+    }
+
+    .grid-section {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablet */
+        gap: 25px;
+    }
+
+    .main-card {
+        padding: 50px 40px;
+        min-height: 380px;
+    }
+
+    .weather-info h1 {
+        font-size: 3rem;
+    }
+
+    #temperature {
+        font-size: 6.5rem;
+    }
+}
+
+/* 3. Small Tablets & Large Phones */
+@media (max-width: 850px) {
+    header {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .search-container {
+        width: 100%;
+        max-width: 450px;
+    }
+}
+
+/* 4. Mobile Devices (iPhone, Android) */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 20px 10px;
+    }
+
+    .grid-section {
+        grid-template-columns: 1fr; /* Single column for mobile */
+        gap: 20px;
+    }
+
+    .main-card {
+        padding: 30px 20px;
+        min-height: 320px;
+        text-align: center;
+    }
+
+    .temp-container {
+        justify-content: center;
+    }
+
+    .weather-info h1 {
+        font-size: 2.2rem;
+    }
+
+    #temperature {
+        font-size: 5rem;
+    }
+
+    .unit {
+        font-size: 2rem;
+    }
+
+    #weather-condition {
+        font-size: 1.2rem;
+    }
+
+    .small-card {
+        padding: 20px;
+    }
+
+    .character-card {
+        height: 300px; /* Constrain height on mobile */
+    }
+
+    footer {
+        margin-top: 10px;
+    }
+
+    /* Disable hover effects on mobile to improve touch experience */
+    .glass-card:hover {
+        transform: none;
+    }
+}
+
+/* 5. Extra Small Devices */
+@media (max-width: 380px) {
+    #temperature {
+        font-size: 4rem;
+    }
+
+    .weather-info h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Weather Effects (Injectable via JS) */
+
+/* Rain */
+.rain-particle {
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4));
+    width: 1px;
+    height: 80px;
+    animation: rainfall linear infinite;
+}
+
+@keyframes rainfall {
+    0% { transform: translateY(-100px); }
+    100% { transform: translateY(500px); }
+}
+
+/* Stars */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Clouds */
+.cloud-svg {
+    position: absolute;
+    opacity: 0.3;
+    animation: drift linear infinite;
+}
+
+@keyframes drift {
+    from { transform: translateX(-150px); } /* Start slightly closer */
+    to { transform: translateX(1200px); }
 }

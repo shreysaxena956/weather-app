@@ -3,58 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-
+    <title>SkyGlass | Premium Weather</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-
-<!-- 🔍 SEARCH -->
-<div class="hero">
-    <div class="search-bar">
-        <input type="text" placeholder="Search city..." spellcheck="false">
-        <button id="searchBtn">Search</button>
-    </div>
-</div>
-
-<!-- MAIN -->
-<div class="main">
-
-    <!-- LEFT WEATHER -->
-    <div class="weather-card">
-        <img src="clear.png" class="weather-icon">
-
-        <h1 class="temp">--°C</h1>
-        <h2 class="city">City</h2>
-
-        <div class="details">
-            <div class="col">
-                <p class="humidity">--%</p>
-                <p>Humidity</p>
+<body class="weather-clear-day">
+    <!-- Dynamic Background Layer -->
+    <div id="dynamic-bg" class="bg-overlay"></div>
+    
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div id="logo-container" class="glass-pill">
+                <i data-lucide="cloud-sun" class="logo-icon"></i>
+                <span class="logo-text">SkyGlass</span>
             </div>
-
-            <div class="col">
-                <p class="wind">-- km/h</p>
-                <p>Wind</p>
+            
+            <div class="search-container glass-pill">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="city-input" placeholder="Search city..." autocomplete="off">
+                <div id="loading-spinner" class="spinner hidden"></div>
             </div>
-        </div>
+        </header>
+
+        <main>
+            <!-- Main Weather Card -->
+            <section class="main-card-section">
+                <div id="weather-card" class="glass-card main-card">
+                    <div class="card-content">
+                        <div class="weather-info">
+                            <h1 id="city-name">Loading...</h1>
+                            <p id="current-time">--:--</p>
+                            <div class="temp-container">
+                                <span id="temperature">--</span><span class="unit">°</span>
+                            </div>
+                            <p id="weather-condition">Please search for a city</p>
+                        </div>
+                        
+                        <!-- Animated Weather Visuals (Inside Card) -->
+                        <div id="card-animation-layer" class="animation-layer">
+                            <!-- Rain, Clouds, Stars, etc. injected here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom Grid -->
+            <section class="grid-section">
+                <!-- What to Wear -->
+                <div class="glass-card small-card" id="clothing-box">
+                    <div class="card-header">
+                        <i data-lucide="shirt"></i>
+                        <h3>What to Wear</h3>
+                    </div>
+                    <div class="clothing-content">
+                        <div id="clothing-icon" class="clothing-visual">
+                            <i data-lucide="sun" class="placeholder-icon"></i>
+                        </div>
+                        <p id="clothing-text">Awaiting data...</p>
+                    </div>
+                </div>
+
+                <!-- Character Box -->
+                <div class="glass-card character-card" id="character-box">
+                    <div class="character-container">
+                        <img id="character-img" src="assets/boy_default.png" alt="Boy Character">
+                    </div>
+                </div>
+
+                <!-- News Box -->
+                <div class="glass-card small-card scrollable" id="news-box">
+                    <div class="card-header">
+                        <i data-lucide="newspaper"></i>
+                        <h3>Weather News</h3>
+                    </div>
+                    <div id="news-list" class="news-list">
+                        <!-- News items injected here -->
+                        <div class="news-item">
+                            <p class="news-title">Loading latest updates...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <!-- Attribution removed -->
+        </footer>
     </div>
 
-    <!-- RIGHT CHARACTER -->
-    <div class="character-box">
-        <div class="boy">
+    <!-- Background Upload Overlay (Invisible Trigger) -->
+    <input type="file" id="bg-upload" accept="image/*" hidden>
 
-            <div class="head"></div>
-            <div class="body"></div>
-
-            <div class="sunglasses hidden" id="sunglasses"></div>
-            <div class="umbrella hidden" id="umbrella"></div>
-
-        </div>
-    </div>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
